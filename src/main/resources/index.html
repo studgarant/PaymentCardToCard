@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title>Тест SOAP</title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <script type="text/javascript">
+            function executeSoap() {
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('POST', 'http://localhost:8889/ws/server/CardToCardPayment', true);
+
+                var form = document.getElementById('cardToCard');
+                var currency = "";
+                
+                for (i = 0; i < form.currency.length; i++) {
+                    if (form.currency[i].checked) {
+                        currency = form.currency[i].value;
+                    }
+                }
+
+                var soapRequest =
+                        '<?xml version="1.0" encoding="utf-8"?>' +
+                        '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://ws.cahek.com/">' +
+                        '<soapenv:Header/>' +
+                        '<soapenv:Body>' +
+                        '<ws:CardToCardPayment>' +
+                        '<TransactionInfo>' +
+                        '<cardFrom>' +
+                        '<cardNumber>' + form.cardFromNumber.value + '</cardNumber>' +
+                        '<ownerName>' + form.cardFromOwner.value + '</ownerName>' +
+                        '<valid>' + form.cardFromMM.value + form.cardFromMM.value + '</valid>' +
+                        '</cardFrom>' +
+                        '<cardTo>' +
+                        '<cardNumber>' + form.cardToNumber.value + '</cardNumber>' +
+                        '<ownerName>' + form.cardToOwner.value + '</ownerName>' +
+                        '<valid>' + form.cardToMM.value + form.cardToMM.value + '</valid>' +
+                        '</cardTo>' +
+                        '<currency>' + currency + '</currency>' +
+                        '<amount>' + form.amount.value + '</amount>' +
+                        '<commission></commission>' +
+                        '</TransactionInfo>' +
+                        '</ws:CardToCardPayment>' +
+                        '</soapenv:Body>' +
+                        '</soapenv:Envelope>';
+
+                xmlhttp.setRequestHeader('Content-Type', 'text/xml');
+                xmlhttp.send(soapRequest);
+
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4) {
+                        if (xmlhttp.status == 200) {
+
+                            var tax = xmlhttp.responseXML.getElementsByTagName("Commission")[0].childNodes[0].nodeValue;
+                            document.getElementById('lbCommission').innerHTML = 'Перевод успешен. Комиссия составила ' + tax;
+                        }
+                    }
+                }
+            }
+        </script>
+
+        <div>
+            <p>Cервис для денежных переводов с карты на карту</p>
+        </div>
+
+
+        <form autocomplete="off" id="cardToCard">
+            <div>Карта отправителя</div>
+            <div>Номер карты <input name="cardFromNumber" maxlength="20" size="20" value="4000000000000000"> 
+                Владелец  <input name="cardFromOwner" maxlength="30" size="30" value="Ivanov Ivan">
+                Срок действия <input name="cardFromMM" maxlength="2" size="2" value="12">/
+                <input name="cardFromGG" maxlength="2" size="2" value="20">
+            </div>
+            <br></br>            
+            <div>Карта получателя</div>
+            <div>Номер карты <input name="cardToNumber" maxlength="20" size="20"  value="5000000000000000"> 
+                Владелец  <input name="cardToOwner" maxlength="30" size="30" value="Petrov Petr">
+                Срок действия <input name="cardToMM" maxlength="2" size="2" value="11">/
+                <input name="cardToGG" maxlength="2" size="2" value="19">
+            </div>
+            <br></br>            
+            <div>Сумма перевода</div>
+            <div><input name="amount" maxlength="12" size="12" value="1125"><br></br> 
+                Валюта перевода <input type="radio" name="currency" value="BYN" checked> BYN 
+                <input type="radio" name="currency" value="RUB"> RUB  
+                <input type="radio" name="currency" value="USD"> USD  
+                <input type="radio" name="currency" value="EUR"> EUR  
+            </div>            
+        </form>
+        <br></br> 
+        <div><button name="adding" onClick="executeSoap()">Перевести</button></div>
+        <br></br>
+        <div><label id="lbCommission"></label></div>
+    </body>
+</html>
