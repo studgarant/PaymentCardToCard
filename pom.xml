@@ -7,7 +7,7 @@
     <groupId>testex</groupId>
     <artifactId>ws</artifactId>
     <version>1.0-SNAPSHOT</version>
- 
+    <packaging>war</packaging>
     <build>
         <plugins>
             <plugin>
@@ -19,9 +19,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>                
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
         </plugins> 
     </build>
-
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

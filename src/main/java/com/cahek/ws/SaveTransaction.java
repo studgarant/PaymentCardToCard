@@ -26,7 +26,6 @@ public class SaveTransaction {
             preparedStatement.setFloat(4, transaction.getAmount());
             preparedStatement.setFloat(5, transaction.getCommission());
             preparedStatement.executeUpdate();
-            con.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();

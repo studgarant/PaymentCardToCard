@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-//@XmlType(name = "transactionInfo", propOrder = {"cardFrom", "cardTo", "currency", "amount"})
 @XmlType(propOrder = {"cardFrom", "cardTo", "currency", "amount", "commission"})
 public class Transaction {
 

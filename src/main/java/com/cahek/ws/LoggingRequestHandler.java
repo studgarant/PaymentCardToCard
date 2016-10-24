@@ -17,8 +17,7 @@ public class LoggingRequestHandler implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public boolean handleMessage(SOAPMessageContext context) {
-
-        //log.info("Server: handleMessage()");     
+   
         Boolean isRequest = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 
         //for response message only, true for outbound messages, false for inbound
@@ -41,18 +40,18 @@ public class LoggingRequestHandler implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public boolean handleFault(SOAPMessageContext context) {
-        //log.info("Server: handleFault()");        
+       
         return true;
     }
 
     @Override
     public void close(MessageContext context) {
-        //log.info("Server: close()");        
+      
     }
 
     @Override
     public Set<QName> getHeaders() {
-        //log.info("Server: getHeaders()");
+
         return null;
     }
 }

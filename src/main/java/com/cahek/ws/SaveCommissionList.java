@@ -19,7 +19,6 @@ public class SaveCommissionList {
                 PreparedStatement preparedStatement = con.prepareStatement(QUERYINSERT);) {
 
             statement.executeUpdate(QUERYTRUNCATE);
-            con.commit();
 
             for (Commission c : commissionList) {
 
@@ -29,7 +28,6 @@ public class SaveCommissionList {
                 preparedStatement.setFloat(4, c.getValue());
                 preparedStatement.executeUpdate();
             }
-            con.commit();
 
         } catch (SQLException e) {
             e.printStackTrace();
