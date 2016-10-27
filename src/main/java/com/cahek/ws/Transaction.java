@@ -5,15 +5,32 @@ import javax.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ *  Transaction information
+ */
 @XmlType(propOrder = {"cardFrom", "cardTo", "currency", "amount", "commission"})
 public class Transaction {
 
+    /** Payment from this credit card*/
     private Card cardFrom;
-    private Card cardTo;
-    private float amount;
-    private Currency currency;
-    private float commission;
 
+    /** Payment to this credit card*/
+    private Card cardTo;
+
+    /** Transaction amount*/
+    private BigDecimal amount;
+
+    /** Transaction currency*/
+    private Currency currency;
+
+    /** Transaction commission*/
+    private BigDecimal commission;
+
+    /**
+     * Get card brand from first number of credit card
+     * @param cardNumber credit card number
+     * @return credit card brand
+     */
     public CardBrand getCardBrand(String cardNumber) {
 
         CardBrand cardBrand;
@@ -33,12 +50,26 @@ public class Transaction {
         return cardBrand;
     }
 
+    /**
+     * Calculate commission
+     */
     public void calculateCommission() {
-        setCommission(new BigDecimal(new GetCommissionPercent().ComissionGetFromDB(getCardBrand(cardFrom.getCardNumber()), currency) * amount / 100).setScale(2, RoundingMode.UP).floatValue());
+
+        setCommission(new BigDecimal(new GetCommissionPercent().ComissionGetFromDB(getCardBrand(
+                cardFrom.getCardNumber()), currency).toString()).setScale(2, RoundingMode.UP));
     }
 
-    public float getCommissionPercent() {
-        return new BigDecimal(getCommission() / getAmount() * 100).setScale(2, RoundingMode.UP).floatValue();
+    /**
+     * Get commissions percent
+     * @return  commissions percent
+     */
+    public BigDecimal getCommissionPercent() {
+
+        BigDecimal returnValue = new BigDecimal(getCommission().toString());
+        returnValue = returnValue.multiply(new BigDecimal(100));
+        returnValue = returnValue.divide(new BigDecimal(getAmount().toString())).setScale(2, RoundingMode.UP);
+
+        return returnValue;
     }
 
     @XmlElement(required = true)
@@ -60,11 +91,11 @@ public class Transaction {
     }
 
     @XmlElement(required = true)
-    public float getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -78,12 +109,12 @@ public class Transaction {
     }
 
     @XmlElement(required = false)
-    public float getCommission() {
+    public BigDecimal getCommission() {
 
         return commission;
     }
 
-    public void setCommission(float commission) {
+    public void setCommission(BigDecimal commission) {
         this.commission = commission;
     }
 }

@@ -1,30 +1,39 @@
 package com.cahek.ws;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.math.BigDecimal;
+import java.sql.*;
 
+/**
+ * Get commission percent from DB
+ */
 public class GetCommissionPercent {
 
-    public float ComissionGetFromDB(CardBrand cardBrand, Currency cardCurrency) {
-        String QUERYSELECT = "SELECT value FROM commission WHERE brand='" + cardBrand.toString() + "' AND currency='"
-                + cardCurrency.toString() + "'";
-        float commission = 0;
+    /**
+     * Get credit card brand and currency and return commission percent from DB
+     * @param cardBrand credit card brand
+     * @param cardCurrency credit card currency
+     * @return commission percent from DB
+     */
+    public BigDecimal ComissionGetFromDB(CardBrand cardBrand, Currency cardCurrency) {
+        String QUERYSELECT = "SELECT value FROM commission WHERE brand=? AND currency=?";
+        BigDecimal commission = null;
 
         try (Connection con = (Connection) ConnectionDB.getConnection();
-                Statement statement = con.createStatement();) {
-            ResultSet rs = statement.executeQuery(QUERYSELECT);
+             PreparedStatement ps = con.prepareStatement(QUERYSELECT);) {
+            ps.setString(1, cardBrand.toString());
+            ps.setString(2, cardCurrency.toString());
+
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                commission = rs.getFloat("value");
+                commission = rs.getBigDecimal("value");
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            return commission;
         }
+
+        return commission;
     }
 
 }

@@ -4,17 +4,27 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
+import java.math.BigDecimal;
 
+/**
+ * Commission
+ */
 @XmlRootElement(name = "commission")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Commission {
 
+    /** id */
     @XmlAttribute
     private int id;
 
+    /** Credit card brand */
     private CardBrand brand;
+
+    /** Credit card currency */
     private Currency currency;
-    private float value;
+
+    /** Credit card commission */
+    private BigDecimal value;
 
     public int getId() {
         return id;
@@ -40,11 +50,11 @@ public class Commission {
         this.currency = currency;
     }
 
-    public float getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 }

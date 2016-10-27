@@ -3,11 +3,19 @@ package com.cahek.ws;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Credit card information
+ */
 @XmlType(propOrder = {"cardNumber", "ownerName", "valid"})
 public class Card {
 
+    /** Credit card number*/
     private String cardNumber;
+
+    /** Credit card owner*/
     private String ownerName;
+
+    /** Credit card month/year date MM/YY */
     private String valid;
 
     @XmlElement(required = true)

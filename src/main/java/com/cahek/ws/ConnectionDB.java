@@ -7,8 +7,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * Connection to DB
+ */
 public class ConnectionDB {
 
+    /**
+     * Create and return connection to DB
+     * @return connection to DB
+     */
     public static Connection getConnection() {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream input = classLoader.getResourceAsStream("db.properties");
