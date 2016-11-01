@@ -1,5 +1,7 @@
 package com.cahek.ws;
 
+import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.List;
 
@@ -8,14 +10,16 @@ import java.util.List;
  */
 public class SaveCommissionList {
 
+    final static Logger logger = Logger.getLogger(SaveTransaction.class);
+
     /**
      * Save commission to DB
      * @param commissionList {@link List} {@link Commission}
      */
     public SaveCommissionList(List<Commission> commissionList) {
 
-        String QUERYCREAT = "CREATE TABLE Commission (id int PRIMARY KEY,  brand VARCHAR(20),  " +
-                "currency VARCHAR(3),  value DECIMAL(5,2)";
+        String QUERYCREAT = "CREATE TABLE IF NOT EXISTS Commission (id int PRIMARY KEY,  brand VARCHAR(20),  " +
+                "currency VARCHAR(3),  value DECIMAL(5,2))";
         String QUERYSELECT = "SELECT ID FROM commission WHERE BRAND=? AND CURRENCY=?";
         String QUERYINSERT = "INSERT INTO commission (ID, BRAND, CURRENCY, VALUE) VALUES (?, ?, ?, ?)";
         String QUERYUPDATE = "UPDATE commission SET VALUE=? WHERE BRAND=? AND CURRENCY=?";
@@ -49,7 +53,7 @@ public class SaveCommissionList {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Save commission's list to DB: " + e.toString());
         }
     }
 

@@ -1,6 +1,8 @@
 package com.cahek.ws;
 
 import com.google.gson.Gson;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -10,6 +12,8 @@ import java.sql.Statement;
  * Save transaction to DB
  */
 public class SaveTransaction {
+
+    final static Logger logger = Logger.getLogger(SaveTransaction.class);
 
     /**
      * Transaction information save to DB
@@ -40,7 +44,7 @@ public class SaveTransaction {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Save transaction information: " + e.toString());
         }
     }
 }

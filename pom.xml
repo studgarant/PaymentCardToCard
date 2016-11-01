@@ -22,14 +22,19 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>                
+                <version>3.0.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.cahek.ws.WebServicePublisher</mainClass>
+                        </manifest>
+               </archive>
                 </configuration>
             </plugin>
-        </plugins> 
+        </plugins>
     </build>
-    <dependencies>
+  <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

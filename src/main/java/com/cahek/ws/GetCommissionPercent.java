@@ -1,5 +1,7 @@
 package com.cahek.ws;
 
+import org.apache.log4j.Logger;
+
 import java.math.BigDecimal;
 import java.sql.*;
 
@@ -7,6 +9,8 @@ import java.sql.*;
  * Get commission percent from DB
  */
 public class GetCommissionPercent {
+
+    final static Logger logger = Logger.getLogger(SaveTransaction.class);
 
     /**
      * Get credit card brand and currency and return commission percent from DB
@@ -30,7 +34,7 @@ public class GetCommissionPercent {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error("Get commission percent from DB: " + e.toString());
         }
 
         return commission;

@@ -6,11 +6,6 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-/**
- * Crate new card number '5555 4444 3333 2222'
- * owner 'Petr Ivanov'
- * valid date MM/YY '12/20'
- */
 public class CardTest {
     @Test
     public void createCard() throws Exception {
@@ -21,7 +16,7 @@ public class CardTest {
         card.setValid("12/20");
 
         assertThat(card.getCardNumber(), is("5555444433332222"));
-        assertThat(card.getCardNumber(), is("Petr Ivanov"));
-        assertThat(card.getCardNumber(), is("12/20"));
+        assertThat(card.getOwnerName(), is("Petr Ivanov"));
+        assertThat(card.getValid(), is("12/20"));
     }
 }

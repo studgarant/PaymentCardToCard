@@ -1,5 +1,7 @@
 package com.cahek.ws;
 
+import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -12,7 +14,9 @@ import java.util.Properties;
  */
 public class ConnectionDB {
 
-    /**
+    final static Logger logger = Logger.getLogger(SaveTransaction.class);
+
+     /**
      * Create and return connection to DB
      * @return connection to DB
      */
@@ -32,7 +36,7 @@ public class ConnectionDB {
                     props.getProperty("DB_USERNAME"),
                     props.getProperty("DB_PASSWORD"));
         } catch (IOException | ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            logger.error("Connect to DB: " + e.toString());
         }
         return con;
     }

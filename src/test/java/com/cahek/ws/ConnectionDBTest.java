@@ -13,7 +13,7 @@ public class ConnectionDBTest {
         connection = (Connection) ConnectionDB.getConnection();
 
         assertNotNull(connection);
-        assertTrue(connection.isValid(0));
+        assertTrue(connection.isValid(10));
         connection.close();
     }
 }

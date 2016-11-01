@@ -1,5 +1,7 @@
 package com.cahek.ws;
 
+import org.apache.log4j.Logger;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -12,6 +14,8 @@ import java.net.URL;
 public class CommissionsReader {
 
     private String filePath;
+
+    final static Logger logger = Logger.getLogger(SaveTransaction.class);
 
     /**
      * Set path xml file
@@ -36,7 +40,7 @@ public class CommissionsReader {
             commissions = (CommissionList) jaxbUnmarshaller.unmarshal(new File(filePath));
 
         } catch (JAXBException e) {
-            e.printStackTrace();
+            logger.error("Read commissions from XML file: " + e.toString());
         }
 
             return commissions;
