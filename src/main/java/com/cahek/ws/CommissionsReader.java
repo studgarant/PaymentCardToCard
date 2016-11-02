@@ -19,6 +19,7 @@ public class CommissionsReader {
 
     /**
      * Set path xml file
+     *
      * @param filePath path xml file
      */
     public CommissionsReader(String filePath) {
@@ -27,6 +28,7 @@ public class CommissionsReader {
 
     /**
      * Read commissions from xml file to commissions list with help JAXB
+     *
      * @return commissions list
      */
     public CommissionList ReadFromXml() {
@@ -43,6 +45,6 @@ public class CommissionsReader {
             logger.error("Read commissions from XML file: " + e.toString());
         }
 
-            return commissions;
+        return commissions;
     }
 }

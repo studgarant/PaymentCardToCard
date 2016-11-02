@@ -16,8 +16,9 @@ public class ConnectionDB {
 
     final static Logger logger = Logger.getLogger(SaveTransaction.class);
 
-     /**
+    /**
      * Create and return connection to DB
+     *
      * @return connection to DB
      */
     public static Connection getConnection() {
@@ -40,4 +41,5 @@ public class ConnectionDB {
         }
         return con;
     }
+
 }

@@ -17,22 +17,17 @@ public class SaveTransaction {
 
     /**
      * Transaction information save to DB
+     *
      * @param transaction Transaction information
      */
     public SaveTransaction(Transaction transaction) {
 
-        String QUERYCREAT = "CREATE TABLE  IF NOT EXISTS transaction (id int PRIMARY KEY NOT NULL AUTO_INCREMENT, " +
-                "date TIMESTAMP SET DEFAULT CURRENT_TIMESTAMP, cardfrom VARCHAR(100), cardto VARCHAR(100), " +
-                "currency VARCHAR(3),  amount DECIMAL(12,2), commission DECIMAL(10,2))";
-
-        String QUERYINSERT = "INSERT INTO transaction (CARDFROM, CARDTO, CURRENCY, AMOUNT, COMMISSION) " +
-            "VALUES (?, ?, ?, ?, ?)";
+        String QUERYINSERT = "INSERT INTO TRANSACTION (CARDFROM, CARDTO, CURRENCY, AMOUNT, COMMISSION) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = (Connection) ConnectionDB.getConnection();
-                Statement statement = con.createStatement();
-                PreparedStatement preparedStatement = con.prepareStatement(QUERYINSERT);) {
-
-            statement.executeUpdate(QUERYCREAT);
+             Statement statement = con.createStatement();
+             PreparedStatement preparedStatement = con.prepareStatement(QUERYINSERT);) {
 
             Gson gson = new Gson();
 

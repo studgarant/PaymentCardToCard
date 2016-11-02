@@ -14,12 +14,13 @@ public class GetCommissionPercent {
 
     /**
      * Get credit card brand and currency and return commission percent from DB
-     * @param cardBrand credit card brand
+     *
+     * @param cardBrand    credit card brand
      * @param cardCurrency credit card currency
      * @return commission percent from DB
      */
     public BigDecimal ComissionGetFromDB(CardBrand cardBrand, Currency cardCurrency) {
-        String QUERYSELECT = "SELECT value FROM commission WHERE brand=? AND currency=?";
+        String QUERYSELECT = "SELECT value FROM COMMISSION WHERE brand=? AND currency=?";
         BigDecimal commission = null;
 
         try (Connection con = (Connection) ConnectionDB.getConnection();

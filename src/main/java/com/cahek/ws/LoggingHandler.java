@@ -3,7 +3,9 @@ package com.cahek.ws;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Set;
+
 import org.apache.log4j.Logger;
+
 import javax.xml.namespace.QName;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
@@ -18,14 +20,15 @@ public class LoggingHandler implements SOAPHandler<SOAPMessageContext> {
 
     final static Logger logger = Logger.getLogger(LoggingHandler.class);
 
-    /** Logging response only
+    /**
+     * Logging response only
      *
      * @param context {@link SOAPMessageContext}
      * @return true
      */
     @Override
     public boolean handleMessage(SOAPMessageContext context) {
-   
+
         Boolean isRequest = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 
         SOAPMessage soapMsg = context.getMessage();
@@ -47,13 +50,13 @@ public class LoggingHandler implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public boolean handleFault(SOAPMessageContext context) {
-       
+
         return true;
     }
 
     @Override
     public void close(MessageContext context) {
-      
+
     }
 
     @Override

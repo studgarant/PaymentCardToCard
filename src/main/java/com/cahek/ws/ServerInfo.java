@@ -15,6 +15,7 @@ public class ServerInfo {
 
     /**
      * Get transaction information and return commission amount
+     *
      * @param transaction Get message from client with transaction information
      * @return offer with commission amount and currency
      */

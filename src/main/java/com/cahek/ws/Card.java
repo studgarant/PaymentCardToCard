@@ -9,13 +9,19 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(propOrder = {"cardNumber", "ownerName", "valid"})
 public class Card {
 
-    /** Credit card number*/
+    /**
+     * Credit card number
+     */
     private String cardNumber;
 
-    /** Credit card owner*/
+    /**
+     * Credit card owner
+     */
     private String ownerName;
 
-    /** Credit card month/year date MM/YY */
+    /**
+     * Credit card month/year date MM/YY
+     */
     private String valid;
 
     @XmlElement(required = true)

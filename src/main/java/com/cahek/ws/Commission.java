@@ -13,17 +13,25 @@ import java.math.BigDecimal;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Commission {
 
-    /** id */
+    /**
+     * id
+     */
     @XmlAttribute
     private int id;
 
-    /** Credit card brand */
+    /**
+     * Credit card brand
+     */
     private CardBrand brand;
 
-    /** Credit card currency */
+    /**
+     * Credit card currency
+     */
     private Currency currency;
 
-    /** Credit card commission */
+    /**
+     * Credit card commission
+     */
     private BigDecimal value;
 
     public int getId() {

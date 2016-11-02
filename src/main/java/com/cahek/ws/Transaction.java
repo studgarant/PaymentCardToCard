@@ -6,28 +6,39 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- *  Transaction information
+ * Transaction information
  */
 @XmlType(propOrder = {"cardFrom", "cardTo", "currency", "amount", "commission"})
 public class Transaction {
 
-    /** Payment from this credit card*/
+    /**
+     * Payment from this credit card
+     */
     private Card cardFrom;
 
-    /** Payment to this credit card*/
+    /**
+     * Payment to this credit card
+     */
     private Card cardTo;
 
-    /** Transaction amount*/
+    /**
+     * Transaction amount
+     */
     private BigDecimal amount;
 
-    /** Transaction currency*/
+    /**
+     * Transaction currency
+     */
     private Currency currency;
 
-    /** Transaction commission*/
+    /**
+     * Transaction commission
+     */
     private BigDecimal commission;
 
     /**
      * Get card brand from first number of credit card
+     *
      * @param cardNumber credit card number
      * @return credit card brand
      */
@@ -61,7 +72,8 @@ public class Transaction {
 
     /**
      * Get commissions percent
-     * @return  commissions percent
+     *
+     * @return commissions percent
      */
     public BigDecimal getCommissionPercent() {
 
